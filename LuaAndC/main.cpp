@@ -11,15 +11,16 @@ using namespace std;
 
 int main()
 {
+
 	lua_State *L = luaL_newstate();
 	luaL_openlibs(L);
 	luaL_dofile(L, "sudoku.lua");
 
-	lua_getglobal(L, "message",);
+	lua_getglobal(L, "message", );
 	lua_pushstring(L, "8, 0, 0, 4, 0, 6, 0, 0, 7");
 	lua_pushnumber(L, 1);
-	lua_pcall(L, 2,0, 0);
-	
+	lua_pcall(L, 2, 0, 0);
+
 	lua_getglobal(L, "message");
 	lua_pushstring(L, "0, 0, 0, 0, 0, 0, 4, 0, 0");
 	lua_pushnumber(L, 2);
@@ -65,7 +66,7 @@ int main()
 	lua_pcall(L, 0, 0, 0);
 
 	int itemp;
-	cin>> itemp;
+	cin >> itemp;
 
 
 	lua_close(L);
