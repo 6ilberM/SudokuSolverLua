@@ -41,38 +41,69 @@ end
 
 
 --
---~ --Values And their input method
+--Values And their input method
 
---~ --BAseCase
---		Box1    Box2	   Box3
- Line1 ="8, 0, 0, 4, 0, 6, 0, 0, 7"
- Line2 ="0, 0, 0, 0, 0, 0, 4, 0, 0"
- Line3 ="0, 1, 0, 0, 0, 0, 6, 5, 0"
+--BAseCase
+--~ --		Box1    Box2	   Box3
+--~  Line1 ="8, 0, 0, 4, 0, 6, 0, 0, 7"
+--~  Line2 ="0, 0, 0, 0, 0, 0, 4, 0, 0"
+--~  Line3 ="0, 1, 0, 0, 0, 0, 6, 5, 0"
 
---		Box4    Box5	   Box6
- Line4 ="5, 0, 9, 0, 3, 0, 7, 8, 0"
- Line5 ="0, 0, 0, 0, 7, 0, 0, 0, 0"
- Line6 ="0, 4, 8, 0, 2, 0, 1, 0, 3"
+--~ --		Box4    Box5	   Box6
+--~  Line4 ="5, 0, 9, 0, 3, 0, 7, 8, 0"
+--~  Line5 ="0, 0, 0, 0, 7, 0, 0, 0, 0"
+--~  Line6 ="0, 4, 8, 0, 2, 0, 1, 0, 3"
 
---		Box7    Box8	   Box9
- Line7 ="0, 5, 2, 0, 0, 0, 0, 9, 0"
- Line8 ="0, 0, 1, 0, 0, 0, 0, 0, 0"
- Line9 ="3, 0, 0, 9, 0, 2, 0, 0, 5"
-
---~ --				Box1    Box2	   Box3
---~  Line1 ="8, 3, 5, 4, 1, 6, 9, 2, 7"
---~  Line3 ="4, 1, 7, 2, 9, 3, 6, 5, 8"
---~  Line2 ="2, 9, 6, 8, 5, 7, 4, 3, 1"
-
---~ --				Box4    Box5	   Box6
---~  Line4 ="5, 6, 9, 1, 3, 4, 7, 8, 2"
---~  Line5 ="1, 2, 3, 6, 7, 8, 5, 4, 9"
---~  Line6 ="7, 4, 8, 5, 2, 9, 1, 0, 3"
-
---~ --				Box7    Box8	   Box9
+--~ --		Box7    Box8	   Box9
 --~  Line7 ="0, 5, 2, 0, 0, 0, 0, 9, 0"
 --~  Line8 ="0, 0, 1, 0, 0, 0, 0, 0, 0"
 --~  Line9 ="3, 0, 0, 9, 0, 2, 0, 0, 5"
+
+ Line1 =" "
+ Line2 =" "
+ Line3 =" "
+
+--
+ Line4 =" "
+ Line5 =" "
+ Line6 =" "
+
+--
+ Line7 =" "
+ Line8 =" "
+ Line9 =" "
+
+function message(msg,line)
+if (line==1)then
+Line1= msg
+end
+if	(line==2)then
+Line2= msg
+end
+if (line==3)then
+Line3= msg
+end
+if (line==4)then
+Line4= msg
+end
+if	(line==5)then
+Line5= msg
+end
+if (line==6)then
+Line6= msg
+end
+if (line==7)then
+Line7= msg
+end
+if	(line==8)then
+Line8= msg
+end
+if (line==9)then
+Line9= msg
+end
+--print(Line1)
+SetSudoku()
+end
 
 
 --Function that sets the values in the Tables"Array"
@@ -99,8 +130,11 @@ SetLine(Line9,9)
 
 end
 
+function Init()
 
-SetSudoku()
+SolveSudoku()
+Display()
+end
 
 --FindUnassingedLoc WORKS
 function FindUnassingedLoc()
@@ -214,6 +248,7 @@ end
 	return false
 end
 
-SolveSudoku()
 
-			Display()
+
+
+
