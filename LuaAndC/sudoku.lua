@@ -1,4 +1,4 @@
-local Sudoku = {}
+Sudoku = {}
 for Rows=1,9 do
 Sudoku[Rows] = {}
 	for Columns=1,9 do
@@ -7,10 +7,10 @@ Sudoku[Rows] = {}
 	end
 end
 --
-local UNNASINGED = '0'
+UNNASINGED = '0'
 
 function SetLine(Line,Number)
-times=1
+ times=1
 	for word in string.gmatch(Line, '([^, ]+)') do
 	Sudoku[Number][times]=word
 	--(Sudoku[Number][times])
@@ -41,38 +41,38 @@ end
 
 
 --
---Values And their input method
+--~ --Values And their input method
 
---BAseCase
+--~ --BAseCase
+--		Box1    Box2	   Box3
+ Line1 ="8, 0, 0, 4, 0, 6, 0, 0, 7"
+ Line2 ="0, 0, 0, 0, 0, 0, 4, 0, 0"
+ Line3 ="0, 1, 0, 0, 0, 0, 6, 5, 0"
+
+--		Box4    Box5	   Box6
+ Line4 ="5, 0, 9, 0, 3, 0, 7, 8, 0"
+ Line5 ="0, 0, 0, 0, 7, 0, 0, 0, 0"
+ Line6 ="0, 4, 8, 0, 2, 0, 1, 0, 3"
+
+--		Box7    Box8	   Box9
+ Line7 ="0, 5, 2, 0, 0, 0, 0, 9, 0"
+ Line8 ="0, 0, 1, 0, 0, 0, 0, 0, 0"
+ Line9 ="3, 0, 0, 9, 0, 2, 0, 0, 5"
+
 --~ --				Box1    Box2	   Box3
---~ local Line1 ="8, 0, 0, 4, 0, 6, 0, 0, 7"
---~ local Line2 ="0, 0, 0, 0, 0, 0, 4, 0, 0"
---~ local Line3 ="0, 1, 0, 0, 0, 0, 6, 5, 0"
+--~  Line1 ="8, 3, 5, 4, 1, 6, 9, 2, 7"
+--~  Line3 ="4, 1, 7, 2, 9, 3, 6, 5, 8"
+--~  Line2 ="2, 9, 6, 8, 5, 7, 4, 3, 1"
 
 --~ --				Box4    Box5	   Box6
---~ local Line4 ="5, 0, 9, 0, 3, 0, 7, 8, 0"
---~ local Line5 ="0, 0, 0, 0, 7, 0, 0, 0, 0"
---~ local Line6 ="0, 4, 8, 0, 2, 0, 1, 0, 3"
+--~  Line4 ="5, 6, 9, 1, 3, 4, 7, 8, 2"
+--~  Line5 ="1, 2, 3, 6, 7, 8, 5, 4, 9"
+--~  Line6 ="7, 4, 8, 5, 2, 9, 1, 0, 3"
 
 --~ --				Box7    Box8	   Box9
---~ local Line7 ="0, 5, 2, 0, 0, 0, 0, 9, 0"
---~ local Line8 ="0, 0, 1, 0, 0, 0, 0, 0, 0"
---~ local Line9 ="3, 0, 0, 9, 0, 2, 0, 0, 5"
-
---				Box1    Box2	   Box3
-local Line1 ="8, 3, 5, 4, 1, 6, 9, 2, 7"
-local Line2 ="2, 9, 6, 8, 5, 7, 4, 3, 1"
-local Line3 ="4, 1, 7, 2, 9, 3, 6, 5, 8"
-
---				Box4    Box5	   Box6
-local Line4 ="5, 6, 9, 1, 3, 4, 7, 8, 2"
-local Line5 ="1, 2, 3, 6, 7, 8, 5, 4, 9"
-local Line6 ="7, 4, 8, 5, 2, 9, 1, 0, 3"
-
---				Box7    Box8	   Box9
-local Line7 ="0, 5, 2, 0, 0, 0, 0, 9, 0"
-local Line8 ="0, 0, 1, 0, 0, 0, 0, 0, 0"
-local Line9 ="3, 0, 0, 9, 0, 2, 0, 0, 5"
+--~  Line7 ="0, 5, 2, 0, 0, 0, 0, 9, 0"
+--~  Line8 ="0, 0, 1, 0, 0, 0, 0, 0, 0"
+--~  Line9 ="3, 0, 0, 9, 0, 2, 0, 0, 5"
 
 
 --Function that sets the values in the Tables"Array"
@@ -102,16 +102,12 @@ end
 
 SetSudoku()
 
-local ROW
-local COLL
-local NUM
-
 --FindUnassingedLoc WORKS
-function FindUnassingedLoc(Array2D)
+function FindUnassingedLoc()
 	for	i=1,9 do
 		for	j=1,9 do
- 		ROW=i COLL=j
-			if (Array2D[i][j]=='0') then return true
+
+			if (Sudoku[i][j]=='0') then return i,j
 
 			end
 		end
@@ -119,78 +115,105 @@ function FindUnassingedLoc(Array2D)
 	return false
 end
 
---UsedInRow WORKS!
-function UsedInRow(Array2D,ROW,NUM)
-	for coll= 1,9 do
---~ 			print(ROW,coll,NUM)
-		if(Array2D[ROW][coll]==NUM) then return true
 
+--NoConflicts AS soon as any is false it will throw False WORKS
+
+
+--
+function UsedInRow(Row,Num)
+	for i= 1,9 do
+--~ print(Row)
+		if(Sudoku[Row][i]==Num) then
+--~ 			print("Unavalaibale to use")
+			return true
 		end
 	end
+--~ 	print("available to use")
 	return false
 end
+
+
 --UsedInCol
 
-function UsedInCol(Array2D,COLL,NUM)
-	for row= 1,9 do
-		if(Array2D[row][COLL]==NUM) then return true
+function UsedInCol(Col,Num)
+	for i= 1,9 do
+		if(Sudoku[i][Col]==Num) then
+--~ 			print("Unavalaibale to use")
+			return true
 		end
 	end
+--~ 	print("Avalaibale to use")
 return false
 end
 
---UsedInBox
+--~ --UsedInBox
 
-function UsedInBox(Array2D,NUM,ROW,COLL)
-	for i=1,3+(ROW-ROW%3) do
-		for	j=1,3+(COLL-COLL%3) do
+function UsedInBox(Num,Row,Col)
+local RowStart
+local ColStart
 
-			if (Sudoku[i][j] == NUM) then return true
-
-			end
-		end
+	--Rows
+	if(Row<=3) then
+		RowStart=0
+	elseif(Row<=6) then
+		RowStart=3
+	elseif (Row<=9) then
+		RowStart=6
 	end
-	return false
-end
 
---NoConflicts AS soon as any is false it will throw False WORKS
-function NoConflicts(Sudoku,ROW,COLL,NUM)
+	--Collums
+	if(Col<=3) then
+		ColStart=0
+	elseif(Col<=6) then
+		ColStart=3
+	elseif (Col<=9) then
+		ColStart=6
+	end
 
 
---~ return ((UsedInRow(Sudoku, ROW, NUM)==false) and (UsedInBox(Array2D,NUM,ROW,COLL)==false)) --and (UsedInCol(Sudoku, COLL, NUM)==false) )
-return ((UsedInCol(Sudoku, COLL, NUM)==false)) and (UsedInRow(Sudoku, ROW, NUM)==false) --and (UsedInBox(Array2D,NUM,ROW,COLL)==false))
---~ return UsedInBox(Array2D,NUM,ROW,COLL)==false
-end
-
---
-
-function SolveSudoku(Array2D)
-
-	if(false==FindUnassingedLoc(Array2D)) then return true
-		else
-		for	num=1,9 do
-		NUM=''..num
-			if(NoConflicts(Array2D,ROW,COLL,NUM)==true)
-			then Array2D[ROW][COLL] = NUM
-
-			if(SolveSudoku(Array2D)==true) then
-				else Array2D[ROW][COLL]= '0';
-
+		for i=1,3 do
+			for	j=1,3 do
+				if (Sudoku[i+RowStart][j+ColStart] == Num) then
+--~ 				print("Unavalaible BOX")
+				return true
 				end
 			end
 		end
-	end
+--~ 	print("Available BOX")
 return false
 end
 
 
-FindUnassingedLoc(Sudoku)
---~ print(ROW,COLL)
+function NoConflicts(Row,Col,Num)
 
---~ NUM=''.. 3
---~ print(NUM,NoConflicts(Sudoku,ROW,COLL,NUM))
---~ print(NUM,NoConflicts(Sudoku,ROW,COLL,NUM))
-SolveSudoku(Sudoku)
+	return ((UsedInCol(Col, Num)==false) and (UsedInRow(Row, Num)==false)and (UsedInBox(Num,Row,Col)==false))
 
-Display()
---~ DisplayPara(3,3)
+end
+
+
+
+function SolveSudoku()
+	local Row, Col
+
+--BaseCase
+if(not FindUnassingedLoc()) then
+	return true
+else
+	Row,Col=FindUnassingedLoc()
+end
+	for i=1, 9 do
+		if(NoConflicts(Row,Col,''..i)==true) then
+			Sudoku[Row][Col]=''..i
+
+			if(SolveSudoku()) then
+				return true
+			end
+			Sudoku[Row][Col]='0'
+		end
+	end
+	return false
+end
+
+SolveSudoku()
+
+			Display()
